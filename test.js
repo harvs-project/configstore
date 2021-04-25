@@ -1,19 +1,9 @@
-import fs from 'fs';
-import path from 'path';
-import os from 'os';
 import test from 'ava';
 import Configstore from './index.js';
 
 const configstorePath = new Configstore('configstore-test').path;
 
-const cleanUpFile = () => {
-	if (fs.existsSync(configstorePath)) {
-		fs.unlinkSync(configstorePath);
-	}
-};
-
 test.beforeEach(t => {
-	cleanUpFile();
 	t.context.config = new Configstore('configstore-test');
 });
 
@@ -49,6 +39,7 @@ test('.set() with object and .get()', t => {
 	t.deepEqual(config.get('baz.foo'), {bar: 'baz'});
 	t.is(config.get('baz.foo.bar'), 'baz');
 });
+
 
 test('.has()', t => {
 	const {config} = t.context;
@@ -99,54 +90,13 @@ test('.size', t => {
 	t.is(config.size, 1);
 });
 
-test('.path', t => {
-	const {config} = t.context;
-	config.set('foo', 'bar');
-	t.true(fs.existsSync(config.path));
-});
-
 test('use default value', t => {
 	const config = new Configstore('configstore-test', {foo: 'bar'});
 	t.is(config.get('foo'), 'bar');
 });
 
-test('support `globalConfigPath` option', t => {
-	const config = new Configstore('configstore-test', {}, {globalConfigPath: true});
-	t.regex(config.path, /configstore-test(\/|\\)config.json$/);
-});
-
-test('support `configPath` option', t => {
-	const customPath = path.join(os.tmpdir(), 'configstore-custom-path', 'foo.json');
-	const config = new Configstore('ignored-namespace', {}, {
-		globalConfigPath: true,
-		configPath: customPath
-	});
-	t.regex(config.path, /configstore-custom-path(\/|\\)foo.json$/);
-});
-
 test('ensure `.all` is always an object', t => {
-	cleanUpFile();
-
 	t.notThrows(() => {
 		t.context.config.get('foo');
 	});
-});
-
-test('the store is NOT created until write', t => {
-	cleanUpFile();
-	const config = new Configstore('configstore-test');
-	t.false(fs.existsSync(config.path));
-	config.set('foo', 'bar');
-	t.true(fs.existsSync(config.path));
-});
-
-test('ensure necessary sub-directories are created', t => {
-	const customPath = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'configstore-recursive-')), 'foo', 'bar', 'baz.json');
-	const config = new Configstore('ignored-namespace', undefined, {
-		globalConfigPath: true,
-		configPath: customPath
-	});
-	t.false(fs.existsSync(config.path));
-	config.set('foo', 'bar');
-	t.true(fs.existsSync(config.path));
 });
