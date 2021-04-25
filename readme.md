@@ -1,12 +1,8 @@
+**This is a fork. You can find the original source code in https://github.com/yeoman/configstore**
+
 # configstore
 
 > Easily load and persist config without having to think about where and how
-
-The config is stored in a JSON file located in `$XDG_CONFIG_HOME` or `~/.config`.\
-Example: `~/.config/configstore/some-id.json`
-
-*If you need this for Electron, check out [`electron-store`](https://github.com/sindresorhus/electron-store) instead.*\
-*And check out [`conf`](https://github.com/sindresorhus/conf) for a more modern version of `configstore`.*
 
 ## Install
 
@@ -43,7 +39,7 @@ console.log(config.get('awesome'));
 
 ## API
 
-### Configstore(packageName, defaults?, options?)
+### Configstore(packageName, defaults?)
 
 Returns a new instance.
 
@@ -58,26 +54,6 @@ Name of your package.
 Type: `object`
 
 Default config.
-
-#### options
-
-Type: `object`
-
-##### globalConfigPath
-
-Type: `boolean`\
-Default: `false`
-
-Store the config at `$CONFIG/package-name/config.json` instead of the default `$CONFIG/configstore/package-name.json`. This is not recommended as you might end up conflicting with other tools, rendering the "without having to think" idea moot.
-
-##### configPath
-
-Type: `string`\
-Default: Automatic
-
-**Please don't use this option unless absolutely necessary and you know what you're doing.**
-
-Set the path of the config file. Overrides the `packageName` and `globalConfigPath` options.
 
 ### Instance
 
@@ -124,15 +100,3 @@ config.all = {
 	hello: 'world'
 };
 ```
-
----
-
-<div align="center">
-	<b>
-		<a href="https://tidelift.com/subscription/pkg/npm-configstore?utm_source=npm-configstore&utm_medium=referral&utm_campaign=readme">Get professional support for this package with a Tidelift subscription</a>
-	</b>
-	<br>
-	<sub>
-		Tidelift helps make open source sustainable for maintainers while giving companies<br>assurances about security, maintenance, and licensing for their dependencies.
-	</sub>
-</div>
