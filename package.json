@@ -4,6 +4,10 @@
 	"version": "0.0.1",
 	"license": "AGPL-3.0-or-later",
 	"description": "Easily load and persist config",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/harvs-project/piconfigstore.git"
+	},
 	"author": {
 		"name": "André",
 		"email": "abs@emancipe.se"
