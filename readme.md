@@ -1,19 +1,19 @@
 **This is a fork. You can find the original source code in https://github.com/yeoman/configstore**
 
-# configstore
+# piconfigstore
 
-> Easily load and persist config without having to think about where and how
+> Easily load and persist config
 
 ## Install
 
 ```
-$ npm install configstore
+$ npm install @harvs-project/piconfigstore
 ```
 
 ## Usage
 
 ```js
-import Configstore from 'configstore';
+import Configstore from '@harvs-project/piconfigstore';
 
 const packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 

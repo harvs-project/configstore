@@ -1,9 +1,9 @@
 {
-	"name": "configstore",
+	"name": "@harvs-project/piconfigstore",
 	"type": "module",
-	"version": "7.0.0-fork",
+	"version": "0.0.1",
 	"license": "AGPL-3.0-or-later",
-	"description": "Easily load and save config without having to think about where and how",
+	"description": "Easily load and persist config",
 	"author": {
 		"name": "André",
 		"email": "abs@emancipe.se"
